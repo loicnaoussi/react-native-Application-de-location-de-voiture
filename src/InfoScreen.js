@@ -28,6 +28,10 @@ const InfoScreen = ({ route, navigation }) => {
     if (id == 4) return image_v_4;
   };
 
+  const convertPriceToXAF = (priceInUSD) => {
+    return priceInUSD * 600; // 1 USD = 600 XAF
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -42,7 +46,7 @@ const InfoScreen = ({ route, navigation }) => {
               style={styles.menuIconStyle}
             />
           </TouchableOpacity>
-          <Text style={styles.HeaderText}>Detail</Text>
+          <Text style={styles.HeaderText}>Détail</Text>
           <Image
             source={dots}
             resizeMode="contain"
@@ -64,28 +68,28 @@ const InfoScreen = ({ route, navigation }) => {
               {vehicle.make} {vehicle.model}
             </Text>
             <Text style={styles.price}>
-              <Text style={styles.amount}>${vehicle.price_per_day}</Text> /day
+              <Text style={styles.amount}>{convertPriceToXAF(vehicle.price_per_day).toLocaleString()} XAF</Text> /jour
             </Text>
           </View>
           <Text style={styles.typetranText}>
-            {vehicle.type}-{vehicle.transmission}
+            {vehicle.type} - {vehicle.transmission}
           </Text>
         </View>
 
         <Text style={styles.descriptionText}>{vehicle.description}</Text>
-        <Text style={styles.propertiesText}>Properties</Text>
+        <Text style={styles.propertiesText}>Propriétés</Text>
 
         <View style={styles.propertiesArea}>
           <View style={styles.level}>
             <Text style={styles.propertyText}>
-              Motor power:
+              Puissance moteur:
               <Text style={styles.valueText}>
                 {" "}
-                {vehicle.properties.motor_power_hp} hp
+                {vehicle.properties.motor_power_hp} ch
               </Text>
             </Text>
             <Text style={styles.propertyText}>
-              Engine capacity:
+              Cylindrée moteur:
               <Text style={styles.valueText}>
                 {" "}
                 {vehicle.properties.engine_capacity_cc} cc
@@ -94,7 +98,7 @@ const InfoScreen = ({ route, navigation }) => {
           </View>
           <View style={styles.level}>
             <Text style={styles.propertyText}>
-              Fuel:
+              Carburant:
               <Text style={styles.valueText}>
                 {" "}
                 {vehicle.properties.fuel_type}
@@ -112,7 +116,7 @@ const InfoScreen = ({ route, navigation }) => {
         </View>
 
         <TouchableOpacity style={styles.rentButton}>
-          <Text style={styles.rentButtonText}>Rent a Car</Text>
+          <Text style={styles.rentButtonText}>Louer une voiture</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
